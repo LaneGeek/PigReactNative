@@ -45,22 +45,25 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     gameBox: {
-        flex: 1,
+        flex: 0,
         backgroundColor: '#ffe',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
         width: '90%',
-        height: 100
+        height: '90%'
     },
     row: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'center',
+        width: '90%',
+        height: '10%',
+        borderWidth: 2
     },
     box: {
-        width: 50,
-        height: 50,
+        width: '25%',
+        height: '90%',
+        marginHorizontal: '10%',
         borderWidth: 1
     }
 });
