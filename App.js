@@ -4,32 +4,34 @@ import {StyleSheet, Text, View} from 'react-native';
 const App = () => {
     return (
         <View style={styles.container}>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Player 1</Text></View>
-                <View style={styles.box}><Text>Player 2</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Enter Name</Text></View>
-                <View style={styles.box}><Text>Enter Name</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Player x's Turn</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Image</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Points For This Turn</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>0</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>Roll Die</Text></View>
-                <View style={styles.box}><Text>Start Turn</Text></View>
-            </View>
-            <View style={styles.row}>
-                <View style={styles.box}><Text>New Game</Text></View>
+            <View style={styles.gameBox}>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Player 1</Text></View>
+                    <View style={styles.box}><Text>Player 2</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Enter Name</Text></View>
+                    <View style={styles.box}><Text>Enter Name</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Player x's Turn</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Image</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Points For This Turn</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>0</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>Roll Die</Text></View>
+                    <View style={styles.box}><Text>Start Turn</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text>New Game</Text></View>
+                </View>
             </View>
         </View>
     );
@@ -38,18 +40,28 @@ const App = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#eff',
         alignItems: 'center',
         justifyContent: 'center'
     },
+    gameBox: {
+        flex: 1,
+        backgroundColor: '#ffe',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '90%',
+        height: 100
+    },
     row: {
-        flexDirection: "row"
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
     },
     box: {
-        width: 100,
-        height: 100,
-        borderWidth: 1,
-        alignItems: 'center'
+        width: 50,
+        height: 50,
+        borderWidth: 1
     }
 });
 
