@@ -16,8 +16,8 @@ const App = () => {
                 <View style={styles.row}>
                     <View style={styles.box}><Text>Player x's Turn</Text></View>
                 </View>
-                <View style={styles.row}>
-                    <View style={styles.box}><Text>Image</Text></View>
+                <View style={{...styles.row, flex: 3}}>
+                    <View style={{...styles.box, width: '75%'}}><Text>Image</Text></View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text>Points For This Turn</Text></View>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        height: '10%',
+        flex: 1,
         borderWidth: 2
     },
     box: {
