@@ -1,36 +1,38 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
+
+const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
     return (
         <View style={styles.container}>
             <View style={styles.gameBox}>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>Player 1</Text></View>
-                    <View style={styles.box}><Text>Player 2</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Player 1</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Player 2</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>Enter Name</Text></View>
-                    <View style={styles.box}><Text>Enter Name</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Enter Name</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Enter Name</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>Player x's Turn</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Player X's Turn</Text></View>
                 </View>
-                <View style={{...styles.row, flex: 3}}>
-                    <View style={{...styles.box, width: '75%'}}><Text>Image</Text></View>
-                </View>
-                <View style={styles.row}>
-                    <View style={styles.box}><Text>Points For This Turn</Text></View>
+                <View style={{...styles.row, flex: 30}}>
+                    <View style={{...styles.box, width: '75%'}}><Text style={styles.text}>{screenHeight + 5}</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>0</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Points For This Turn</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>Roll Die</Text></View>
-                    <View style={styles.box}><Text>Start Turn</Text></View>
+                    <View style={styles.box}><Text style={{...styles.text, fontSize: screenHeight / 20}}>0</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text>New Game</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Roll Die</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Start Turn</Text></View>
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.box}><Text style={styles.text}>New Game</Text></View>
                 </View>
             </View>
         </View>
@@ -48,23 +50,29 @@ const styles = StyleSheet.create({
         flex: 0,
         backgroundColor: '#ffe',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         width: '90%',
-        height: '90%'
+        height: '85%',
+        paddingTop:'5%'
     },
     row: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        flex: 1,
-        borderWidth: 2
+        flex: 10,
+        borderWidth: 1
     },
     box: {
-        width: '25%',
+        width: '35%',
         height: '90%',
         marginHorizontal: '10%',
-        borderWidth: 1
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fef'
+    },
+    text: {
+        fontSize: screenHeight / 45
     }
 });
 
