@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, Button, TextInput, Image} from 'react-native';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -12,14 +12,14 @@ const App = () => {
                     <View style={styles.box}><Text style={styles.text}>Player 2</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>Enter Name</Text></View>
-                    <View style={styles.box}><Text style={styles.text}>Enter Name</Text></View>
+                    <View style={styles.box}><TextInput style={styles.text}>Enter Name</TextInput></View>
+                    <View style={styles.box}><TextInput style={styles.text}>Enter Name</TextInput></View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Player X's Turn</Text></View>
                 </View>
                 <View style={{...styles.row, flex: 30}}>
-                    <View style={{...styles.box, width: '75%'}}><Text style={styles.text}>{screenHeight + 5}</Text></View>
+                    <View style={{...styles.box, width: '75%'}}><Image style={{width: '90%', height: '90%'}} source={require('./assets/pig.jpg')}/></View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Points For This Turn</Text></View>
@@ -28,11 +28,11 @@ const App = () => {
                     <View style={styles.box}><Text style={{...styles.text, fontSize: screenHeight / 20}}>0</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>Roll Die</Text></View>
-                    <View style={styles.box}><Text style={styles.text}>Start Turn</Text></View>
+                    <View style={styles.box}><Button title="Roll Die"/></View>
+                    <View style={styles.box}><Button title="Start Turn"/></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>New Game</Text></View>
+                    <View style={styles.box}><Button title="New Game"/></View>
                 </View>
             </View>
         </View>
