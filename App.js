@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View, Dimensions, Button, TextInput, Image} from 'react-native';
 import PigGame from './PigGame';
 
 const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
-    const pigGame = new PigGame(5, 3, 0, 1);
+    const pigGame = new PigGame(0, 0, 0, 1);
     let die = 0;
 
-    pigGame.show();
-    console.log(pigGame.player1Score);
+    const [player1Name, setPlayer1Name] = useState('Enter Name');
+    const [player2Name, setPlayer2Name] = useState('Enter Name');
+    const [rollDieButtonIsDisabled, disableDieButton] = useState(true);
+    const [turnButtonIsDisabled, disableTurnButton] = useState(false);
+    const [turnButtonText, setTurnButtonText] = useState('Start Turn');
 
+    pigGame.changeTurn();
+    console.log(pigGame.currentPlayer);
 
     return (
         <View style={styles.container}>
@@ -24,17 +29,25 @@ const App = () => {
                         <TextInput
                             autoCapitalize="none"
                             autoCorrect={false}
-                            style={styles.text}>Enter Name</TextInput>
+                            style={styles.text}
+                            value={player1Name}
+                            onChangeText={x => setPlayer1Name(x)}
+                        />
                     </View>
                     <View style={styles.box}>
                         <TextInput
                             autoCapitalize="none"
                             autoCorrect={false}
-                            style={styles.text}>Enter Name</TextInput>
+                            style={styles.text}
+                            value={player2Name}
+                            onChangeText={x => setPlayer2Name(x)}
+                        />
                     </View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>Player X's Turn</Text></View>
+                    <View style={styles.box}>
+                        <Text style={styles.text}>{pigGame.currentPlayer === 1 ? player1Name : player2Name}'s Turn</Text>
+                    </View>
                 </View>
                 <View style={{...styles.row, flex: 30}}>
                     <View style={{...styles.box, width: '75%'}}>
@@ -49,10 +62,30 @@ const App = () => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Button title="Roll Die" onPress={() => pigGame.show()}/>
+                        <Button
+                            title="Roll Die"
+                            disabled={rollDieButtonIsDisabled}
+                            onPress={() => pigGame.show()}
+                        />
                     </View>
                     <View style={styles.box}>
-                        <Button title="Start Turn" onPress={() => pigGame.rollDie()}/>
+                        <Button
+                            title={turnButtonText}
+                            disabled={turnButtonIsDisabled}
+                            onPress={() => {
+
+                                if (turnButtonText === 'Start Turn') {
+                                    setTurnButtonText('End Turn');
+                                    disableDieButton(false);
+                                } else {
+                                    setTurnButtonText('Start Turn');
+                                    pigGame.changeTurn();
+                                    die = 0;
+                                    console.log(pigGame.currentPlayer);
+                                    disableDieButton(true);
+                                }
+                            }}
+                        />
                     </View>
                 </View>
                 <View style={styles.row}>
