@@ -19,7 +19,9 @@ const App = () => {
                     <View style={styles.box}><Text style={styles.text}>Player X's Turn</Text></View>
                 </View>
                 <View style={{...styles.row, flex: 30}}>
-                    <View style={{...styles.box, width: '75%'}}><Image style={{width: '90%', height: '90%'}} source={require('./assets/pig.jpg')}/></View>
+                    <View style={{...styles.box, width: '75%'}}>
+                        <Image style={{width: '90%', height: '90%'}} source={require('./assets/pig.jpg')}/>
+                    </View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Points For This Turn</Text></View>
@@ -28,11 +30,17 @@ const App = () => {
                     <View style={styles.box}><Text style={{...styles.text, fontSize: screenHeight / 20}}>0</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Button title="Roll Die"/></View>
-                    <View style={styles.box}><Button title="Start Turn"/></View>
+                    <View style={styles.box}>
+                        <Button title="Roll Die"/>
+                    </View>
+                    <View style={styles.box}>
+                        <Button title="Start Turn"/>
+                    </View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Button title="New Game"/></View>
+                    <View style={styles.box}>
+                        <Button title="New Game"/>
+                    </View>
                 </View>
             </View>
         </View>
