@@ -1,9 +1,17 @@
 import React from 'react';
 import {StyleSheet, Text, View, Dimensions, Button, TextInput, Image} from 'react-native';
+import PigGame from './PigGame';
 
 const screenHeight = Dimensions.get('window').height;
 
 const App = () => {
+    const pigGame = new PigGame(5, 3, 0, 1);
+    let die = 0;
+
+    pigGame.show();
+    console.log(pigGame.player1Score);
+
+
     return (
         <View style={styles.container}>
             <View style={styles.gameBox}>
@@ -12,8 +20,18 @@ const App = () => {
                     <View style={styles.box}><Text style={styles.text}>Player 2</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><TextInput style={styles.text}>Enter Name</TextInput></View>
-                    <View style={styles.box}><TextInput style={styles.text}>Enter Name</TextInput></View>
+                    <View style={styles.box}>
+                        <TextInput
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            style={styles.text}>Enter Name</TextInput>
+                    </View>
+                    <View style={styles.box}>
+                        <TextInput
+                            autoCapitalize="none"
+                            autoCorrect={false}
+                            style={styles.text}>Enter Name</TextInput>
+                    </View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Player X's Turn</Text></View>
@@ -31,10 +49,10 @@ const App = () => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Button title="Roll Die"/>
+                        <Button title="Roll Die" onPress={() => pigGame.show()}/>
                     </View>
                     <View style={styles.box}>
-                        <Button title="Start Turn"/>
+                        <Button title="Start Turn" onPress={() => pigGame.rollDie()}/>
                     </View>
                 </View>
                 <View style={styles.row}>
