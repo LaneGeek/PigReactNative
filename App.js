@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, Dimensions, Button, TextInput, Image} from 'reac
 import PigGame from './PigGame';
 
 const screenHeight = Dimensions.get('window').height;
-const pigGame = new PigGame(0, 0, 0, 1);
+let pigGame = new PigGame(0, 0, 0, 1);
 
 const App = () => {
 
@@ -17,9 +17,6 @@ const App = () => {
     const [turnPoints, setTurnPoints] = useState(pigGame.turnPoints);
     const [currentPlayer, setCurrentPlayer] = useState(pigGame.currentPlayer);
     const [die, setDie] = useState(0);
-
-    //pigGame.changeTurn();
-    //console.log(pigGame.currentPlayer);
 
     return (
         <View style={styles.container}>
@@ -48,26 +45,30 @@ const App = () => {
                         />
                     </View>
                 </View>
-
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Score</Text></View>
                     <View style={styles.box}><Text style={styles.text}>Score</Text></View>
                 </View>
-
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>{player1Score}</Text></View>
                     <View style={styles.box}><Text style={styles.text}>{player2Score}</Text></View>
                 </View>
-
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Text style={styles.text}>{pigGame.currentPlayer === 1 ? player1Name : player2Name}'s Turn</Text>
+                        <Text style={styles.text}>{currentPlayer === 1 ? player1Name : player2Name}'s Turn</Text>
                     </View>
                 </View>
                 <View style={{ ...styles.row, flex: 30 }}>
                     <View style={{ ...styles.box, width: '75%' }}>
-                        <Image style={{ width: '90%', height: '90%' }} source={require('./assets/pig.jpg')}/>
-                        <Text>{die}</Text>
+                        <Image style={{ width: '90%', height: '90%', resizeMode: 'contain' }} source={
+                            die === 0 ? require('./assets/pig.jpg') : (
+                                die === 1 ? require('./assets/die1.png') : (
+                                    die === 2 ? require('./assets/die2.png') : (
+                                        die === 3 ? require('./assets/die3.png') : (
+                                            die === 4 ? require('./assets/die4.png') : (
+                                                die === 5 ? require('./assets/die5.png') : require('./assets/die6.png'))))))
+                        }
+                        />
                     </View>
                 </View>
                 <View style={styles.row}>
@@ -100,7 +101,6 @@ const App = () => {
                             title={turnButtonText}
                             disabled={turnButtonIsDisabled}
                             onPress={() => {
-
                                 if (turnButtonText === 'Start Turn') {
                                     setTurnButtonText('End Turn');
                                     disableDieButton(false);
@@ -109,19 +109,31 @@ const App = () => {
                                     disableDieButton(true);
                                     pigGame.changeTurn();
                                     setDie(0);
-                                    setPlayer1Score(pigGame.player1Score);
-                                    setPlayer2Score(pigGame.player2Score);
-                                    setTurnPoints(pigGame.turnPoints);
-                                    setCurrentPlayer(pigGame.currentPlayer);
-                                    //console.log(currentPlayer);
                                 }
+                                setPlayer1Score(pigGame.player1Score);
+                                setPlayer2Score(pigGame.player2Score);
+                                setTurnPoints(pigGame.turnPoints);
+                                setCurrentPlayer(pigGame.currentPlayer);
                             }}
                         />
                     </View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Button title="New Game"/>
+                        <Button
+                            title="New Game"
+                            onPress={() => {
+                                pigGame = new PigGame(0, 0, 0, 1);
+                                setDie(0);
+                                disableDieButton(true);
+                                setTurnButtonText('Start Turn');
+                                disableTurnButton(false);
+                                setPlayer1Score(pigGame.player1Score);
+                                setPlayer2Score(pigGame.player2Score);
+                                setTurnPoints(pigGame.turnPoints);
+                                setCurrentPlayer(pigGame.currentPlayer);
+                            }}
+                        />
                     </View>
                 </View>
             </View>

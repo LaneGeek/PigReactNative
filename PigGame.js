@@ -6,11 +6,7 @@ export default class PigGame {
         this.currentPlayer = currentPlayer;
     }
 
-    WINNING_SCORE = 20;
-
-    show() {
-        console.log(this.WINNING_SCORE);
-    }
+    WINNING_SCORE = 40;
 
     rollDie() {
         const roll = Math.floor(Math.random() * 6) + 1;
@@ -30,9 +26,7 @@ export default class PigGame {
         } else {
             this.player2Score += this.turnPoints;
             this.currentPlayer = 1;
-            //console.log('else');
         }
-        //console.log('change of turn', this.currentPlayer);
         this.turnPoints = 0
     }
 
