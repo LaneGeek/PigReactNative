@@ -6,17 +6,17 @@ const screenHeight = Dimensions.get('window').height;
 let pigGame = new PigGame(0, 0, 0, 1);
 
 const App = () => {
-
+    const [die, setDie] = useState(0);
     const [player1Name, setPlayer1Name] = useState('Enter Name1');
     const [player2Name, setPlayer2Name] = useState('Enter Name2');
     const [rollDieButtonIsDisabled, disableDieButton] = useState(true);
     const [turnButtonIsDisabled, disableTurnButton] = useState(false);
     const [turnButtonText, setTurnButtonText] = useState('Start Turn');
+    const [nextTurnText, setNextTurnText] = useState(`Let's Play!`);
     const [player1Score, setPlayer1Score] = useState(pigGame.player1Score);
     const [player2Score, setPlayer2Score] = useState(pigGame.player2Score);
     const [turnPoints, setTurnPoints] = useState(pigGame.turnPoints);
     const [currentPlayer, setCurrentPlayer] = useState(pigGame.currentPlayer);
-    const [die, setDie] = useState(0);
 
     return (
         <View style={styles.container}>
@@ -55,7 +55,7 @@ const App = () => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
-                        <Text style={styles.text}>{currentPlayer === 1 ? player1Name : player2Name}'s Turn</Text>
+                        <Text style={styles.text}>{nextTurnText}</Text>
                     </View>
                 </View>
                 <View style={{ ...styles.row, flex: 30 }}>
@@ -114,6 +114,25 @@ const App = () => {
                                 setPlayer2Score(pigGame.player2Score);
                                 setTurnPoints(pigGame.turnPoints);
                                 setCurrentPlayer(pigGame.currentPlayer);
+
+                                // Check for a winner
+                                if (pigGame.checkForWinner() !== -1) {
+                                    switch (pigGame.checkForWinner()) {
+                                        case 0:
+                                            setNextTurnText('It is a tie!');
+                                            break;
+                                        case 1:
+                                            setNextTurnText(`${player1Name} Wins!`);
+                                            break;
+                                        case 2:
+                                            setNextTurnText(`${player2Name} Wins!`);
+                                            break;
+                                    }
+                                    disableDieButton(true);
+                                    disableTurnButton(true);
+                                } else {
+                                    setNextTurnText(`${currentPlayer === 1 ? player1Name : player2Name}'s Turn`);
+                                }
                             }}
                         />
                     </View>
@@ -132,6 +151,7 @@ const App = () => {
                                 setPlayer2Score(pigGame.player2Score);
                                 setTurnPoints(pigGame.turnPoints);
                                 setCurrentPlayer(pigGame.currentPlayer);
+                                setNextTurnText(`Let's Play!`);
                             }}
                         />
                     </View>

@@ -6,7 +6,7 @@ export default class PigGame {
         this.currentPlayer = currentPlayer;
     }
 
-    WINNING_SCORE = 40;
+    WINNING_SCORE = 20;
 
     rollDie() {
         const roll = Math.floor(Math.random() * 6) + 1;
@@ -31,7 +31,7 @@ export default class PigGame {
     }
 
     checkForWinner() {
-        // returns the player number or 0 for a tie and -1 if no winner or tie
+        // Returns the player number or 0 for a tie and -1 if no winner or tie
         if (this.player1Score >= this.WINNING_SCORE || this.player2Score >= this.WINNING_SCORE) {
             if (this.player2Score > this.player1Score)
                 return 2;
