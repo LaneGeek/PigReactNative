@@ -50,8 +50,12 @@ const App = () => {
                     <View style={styles.box}><Text style={styles.text}>Score</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>{player1Score}</Text></View>
-                    <View style={styles.box}><Text style={styles.text}>{player2Score}</Text></View>
+                    <View style={styles.box}>
+                        <Text style={{ ...styles.text, fontSize: screenHeight / 30 }}>{player1Score}</Text>
+                    </View>
+                    <View style={styles.box}>
+                        <Text style={{ ...styles.text, fontSize: screenHeight / 30 }}>{player2Score}</Text>
+                    </View>
                 </View>
                 <View style={styles.row}>
                     <View style={{ ...styles.box, width: '75%'}}>
@@ -87,8 +91,12 @@ const App = () => {
                             title="Roll Die"
                             disabled={rollDieButtonIsDisabled}
                             onPress={() => {
-                                setDie(pigGame.rollDie());
-                                if (die === 1) {
+                                const dieNow = pigGame.rollDie();
+                                setDie(dieNow);
+                                // the two lines above mean that die and dieNow should be the the same,
+                                // but the line below begs to defer! Why???
+                                console.log(die, dieNow);
+                                if (dieNow === 1) {
                                     disableDieButton(true);
                                     setTurnButtonText('End Turn');
                                     pigGame.changeTurn();
@@ -198,7 +206,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fef'
     },
     text: {
-        fontSize: screenHeight / 45
+        fontSize: screenHeight / 45,
+        fontWeight: 'bold'
     }
 });
 
