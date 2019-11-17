@@ -7,8 +7,8 @@ let pigGame = new PigGame(0, 0, 0, 1);
 
 const App = () => {
     const [die, setDie] = useState(0);
-    const [player1Name, setPlayer1Name] = useState('Enter Name1');
-    const [player2Name, setPlayer2Name] = useState('Enter Name2');
+    const [player1Name, setPlayer1Name] = useState('Enter Name');
+    const [player2Name, setPlayer2Name] = useState('Enter Name');
     const [rollDieButtonIsDisabled, disableDieButton] = useState(true);
     const [turnButtonIsDisabled, disableTurnButton] = useState(false);
     const [turnButtonText, setTurnButtonText] = useState('Start Turn');
@@ -30,7 +30,7 @@ const App = () => {
                         <TextInput
                             autoCapitalize="none"
                             autoCorrect={false}
-                            style={styles.text}
+                            style={{ ...styles.text, fontSize: screenHeight / 50, fontWeight: 'normal' }}
                             value={player1Name}
                             onChangeText={x => setPlayer1Name(x)}
                         />
@@ -39,7 +39,7 @@ const App = () => {
                         <TextInput
                             autoCapitalize="none"
                             autoCorrect={false}
-                            style={styles.text}
+                            style={{ ...styles.text, fontSize: screenHeight / 60, fontWeight: 'normal' }}
                             value={player2Name}
                             onChangeText={x => setPlayer2Name(x)}
                         />
@@ -176,17 +176,15 @@ const App = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#eff',
         alignItems: 'center',
         justifyContent: 'center'
     },
     gameBox: {
         flex: 0,
-        backgroundColor: '#ffe',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '90%',
-        height: '85%',
+        width: '95%',
+        height: '90%',
         paddingTop: '5%'
     },
     row: {
@@ -194,19 +192,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '90%',
-        flex: 10,
-        borderWidth: 1
+        flex: 10
     },
     box: {
         width: '35%',
         height: '90%',
         marginHorizontal: '10%',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#fef'
+        justifyContent: 'center'
     },
     text: {
-        fontSize: screenHeight / 45,
+        fontSize: screenHeight / 35,
         fontWeight: 'bold'
     }
 });
