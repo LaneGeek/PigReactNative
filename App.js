@@ -54,11 +54,11 @@ const App = () => {
                     <View style={styles.box}><Text style={styles.text}>{player2Score}</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}>
+                    <View style={{ ...styles.box, width: '75%'}}>
                         <Text style={styles.text}>{nextTurnText}</Text>
                     </View>
                 </View>
-                <View style={{ ...styles.row, flex: 30 }}>
+                <View style={{ ...styles.row, flex: 40 }}>
                     <View style={{ ...styles.box, width: '75%' }}>
                         <Image style={{ width: '90%', height: '90%', resizeMode: 'contain' }} source={
                             die === 0 ? require('./assets/pig.jpg') : (
@@ -72,10 +72,14 @@ const App = () => {
                     </View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={styles.text}>Points For This Turn</Text></View>
+                    <View style={{ ...styles.box, width: '75%' }}>
+                        <Text style={styles.text}>Points For This Turn</Text>
+                    </View>
                 </View>
-                <View style={styles.row}>
-                    <View style={styles.box}><Text style={{ ...styles.text, fontSize: screenHeight / 20 }}>{turnPoints}</Text></View>
+                <View style={{ ...styles.row, flex: 15 }}>
+                    <View style={styles.box}>
+                        <Text style={{ ...styles.text, fontSize: screenHeight / 15 }}>{turnPoints}</Text>
+                    </View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
