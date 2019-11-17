@@ -26,11 +26,13 @@ export default class PigGame {
     changeTurn() {
         if (this.currentPlayer === 1) {
             this.player1Score += this.turnPoints;
-            this.currentPlayer = 2
+            this.currentPlayer = 2;
         } else {
             this.player2Score += this.turnPoints;
-            this.currentPlayer = 1
+            this.currentPlayer = 1;
+            //console.log('else');
         }
+        //console.log('change of turn', this.currentPlayer);
         this.turnPoints = 0
     }
 

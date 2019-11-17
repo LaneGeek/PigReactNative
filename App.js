@@ -3,19 +3,23 @@ import {StyleSheet, Text, View, Dimensions, Button, TextInput, Image} from 'reac
 import PigGame from './PigGame';
 
 const screenHeight = Dimensions.get('window').height;
+const pigGame = new PigGame(0, 0, 0, 1);
 
 const App = () => {
-    const pigGame = new PigGame(0, 0, 0, 1);
-    let die = 0;
 
-    const [player1Name, setPlayer1Name] = useState('Enter Name');
-    const [player2Name, setPlayer2Name] = useState('Enter Name');
+    const [player1Name, setPlayer1Name] = useState('Enter Name1');
+    const [player2Name, setPlayer2Name] = useState('Enter Name2');
     const [rollDieButtonIsDisabled, disableDieButton] = useState(true);
     const [turnButtonIsDisabled, disableTurnButton] = useState(false);
     const [turnButtonText, setTurnButtonText] = useState('Start Turn');
+    const [player1Score, setPlayer1Score] = useState(pigGame.player1Score);
+    const [player2Score, setPlayer2Score] = useState(pigGame.player2Score);
+    const [turnPoints, setTurnPoints] = useState(pigGame.turnPoints);
+    const [currentPlayer, setCurrentPlayer] = useState(pigGame.currentPlayer);
+    const [die, setDie] = useState(0);
 
-    pigGame.changeTurn();
-    console.log(pigGame.currentPlayer);
+    //pigGame.changeTurn();
+    //console.log(pigGame.currentPlayer);
 
     return (
         <View style={styles.container}>
@@ -44,28 +48,51 @@ const App = () => {
                         />
                     </View>
                 </View>
+
+                <View style={styles.row}>
+                    <View style={styles.box}><Text style={styles.text}>Score</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>Score</Text></View>
+                </View>
+
+                <View style={styles.row}>
+                    <View style={styles.box}><Text style={styles.text}>{player1Score}</Text></View>
+                    <View style={styles.box}><Text style={styles.text}>{player2Score}</Text></View>
+                </View>
+
                 <View style={styles.row}>
                     <View style={styles.box}>
                         <Text style={styles.text}>{pigGame.currentPlayer === 1 ? player1Name : player2Name}'s Turn</Text>
                     </View>
                 </View>
-                <View style={{...styles.row, flex: 30}}>
-                    <View style={{...styles.box, width: '75%'}}>
-                        <Image style={{width: '90%', height: '90%'}} source={require('./assets/pig.jpg')}/>
+                <View style={{ ...styles.row, flex: 30 }}>
+                    <View style={{ ...styles.box, width: '75%' }}>
+                        <Image style={{ width: '90%', height: '90%' }} source={require('./assets/pig.jpg')}/>
+                        <Text>{die}</Text>
                     </View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}><Text style={styles.text}>Points For This Turn</Text></View>
                 </View>
                 <View style={styles.row}>
-                    <View style={styles.box}><Text style={{...styles.text, fontSize: screenHeight / 20}}>0</Text></View>
+                    <View style={styles.box}><Text style={{ ...styles.text, fontSize: screenHeight / 20 }}>{turnPoints}</Text></View>
                 </View>
                 <View style={styles.row}>
                     <View style={styles.box}>
                         <Button
                             title="Roll Die"
                             disabled={rollDieButtonIsDisabled}
-                            onPress={() => pigGame.show()}
+                            onPress={() => {
+                                setDie(pigGame.rollDie());
+                                if (die === 1) {
+                                    disableDieButton(true);
+                                    setTurnButtonText('End Turn');
+                                    pigGame.changeTurn();
+                                }
+                                setPlayer1Score(pigGame.player1Score);
+                                setPlayer2Score(pigGame.player2Score);
+                                setTurnPoints(pigGame.turnPoints);
+                                setCurrentPlayer(pigGame.currentPlayer);
+                            }}
                         />
                     </View>
                     <View style={styles.box}>
@@ -79,10 +106,14 @@ const App = () => {
                                     disableDieButton(false);
                                 } else {
                                     setTurnButtonText('Start Turn');
-                                    pigGame.changeTurn();
-                                    die = 0;
-                                    console.log(pigGame.currentPlayer);
                                     disableDieButton(true);
+                                    pigGame.changeTurn();
+                                    setDie(0);
+                                    setPlayer1Score(pigGame.player1Score);
+                                    setPlayer2Score(pigGame.player2Score);
+                                    setTurnPoints(pigGame.turnPoints);
+                                    setCurrentPlayer(pigGame.currentPlayer);
+                                    //console.log(currentPlayer);
                                 }
                             }}
                         />
@@ -112,7 +143,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '90%',
         height: '85%',
-        paddingTop:'5%'
+        paddingTop: '5%'
     },
     row: {
         flexDirection: 'row',
